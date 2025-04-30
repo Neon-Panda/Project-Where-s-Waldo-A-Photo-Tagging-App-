@@ -1,0 +1,22 @@
+.dialogForm {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100px;
+  gap: 0.5rem;
+  outline: solid 2px red;
+  background-color: hsla(0, 0%, 0%, 0.473);
+  backdrop-filter: blur(3px);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    outline: solid 3px yellow;
+    transform: scale(1.05);
+  }
+}
