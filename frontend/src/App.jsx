@@ -8,9 +8,12 @@ function App() {
   const [positionCoords, setPositionCoords] = useState({});
 
   function handleClick(event) {
+    // console.log("x: " + event.nativeEvent.offsetX);
+    // console.log("y: " + event.nativeEvent.offsetY);
     setModal(modal === true ? false : true);
-    setPositionCoords({ x: event.pageX, y: event.pageY });
+    setPositionCoords({ x: event.nativeEvent.offsetX, y: event.nativeEvent.offsetY });
   }
+
   return (
     <main onClick={(event) => handleClick(event)}>
       {modal === true && <ClickDialog positionCoords={positionCoords} />}

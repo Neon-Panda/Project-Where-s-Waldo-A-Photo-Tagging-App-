@@ -4,8 +4,6 @@ import umbrella from "../assets/umbrella.png";
 import styles from "./ClickDialog.module.css";
 
 export default function ClickDialog({ positionCoords }) {
-  console.log("inside click dialog");
-  console.log(positionCoords);
   return (
     <form
       className={styles.dialogForm}
