@@ -2,10 +2,12 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { randomBytes } from "node:crypto";
 import { addUser, getObjectByName } from "./database/queries.js";
+import cors from "cors";
 
 const server = express();
 server.use(express.json());
 server.use(cookieParser());
+server.use(cors());
 
 class userObj {
   constructor(cookie, timeToLiveInMS) {
@@ -29,25 +31,21 @@ server.get("/api/", (request, response) => {
 });
 
 server.post("/api/checkobject/", async (request, response) => {
+  console.log(request.body);
   const user = usersTimerHolder.get(request.cookies.key);
-  const { xCoord, yCoord, objectName } = request.body;
+  const { x, y, objectName } = request.body;
+  console.log(objectName);
   const objectInfo = await getObjectByName(objectName);
-  if (
-    xCoord > objectInfo.x_start &&
-    xCoord < objectInfo.x_end &&
-    yCoord > objectInfo.y_start &&
-    yCoord < objectInfo.y_end
-  ) {
+  if (x > objectInfo.x_start && x < objectInfo.x_end && y > objectInfo.y_start && y < objectInfo.y_end) {
     user.objectsFound[objectName] = true;
+    response.json({ message: `${objectName} found` });
   }
-  console.log(objectInfo);
-  console.log(user);
 
   if (Object.values(user.objectsFound).every((value) => value === true)) {
     console.log("GAME WON");
     response.send("GAME WON");
   }
-  response.send("check object test");
+  response.send();
 });
 
 server.get("/api/finish", (request, response) => {

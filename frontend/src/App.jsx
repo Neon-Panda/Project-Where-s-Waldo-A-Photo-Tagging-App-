@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClickDialog from "./components/ClickDialog";
 
 function App() {
@@ -7,12 +7,22 @@ function App() {
   const [modal, setModal] = useState(false);
   const [positionCoords, setPositionCoords] = useState({});
 
-  function handleClick(event) {
-    // console.log("x: " + event.nativeEvent.offsetX);
-    // console.log("y: " + event.nativeEvent.offsetY);
-    setModal(modal === true ? false : true);
+  async function handleClick(event) {
     setPositionCoords({ x: event.nativeEvent.offsetX, y: event.nativeEvent.offsetY });
+    setModal(modal === true ? false : true);
   }
+
+  useEffect(() => {
+    fetch("http://localhost:3500/api/"),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credenials: "include",
+        withCredentials: true,
+      };
+    console.log("INSIDE USE EFFECT");
+  }, []);
 
   return (
     <main onClick={(event) => handleClick(event)}>
