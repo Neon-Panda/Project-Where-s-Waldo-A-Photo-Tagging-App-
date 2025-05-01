@@ -22,7 +22,7 @@ const SQL = `
   (name, x_start, x_end, y_start, y_end)
   VALUES
   ('umbrella', 290, 330, 390, 610),
-  ('bottlecap', 195, 240, 680, 710),
+  ('bottle-cap', 195, 240, 680, 710),
   ('dart-board', 810, 870, 310, 380);
 `;
 
